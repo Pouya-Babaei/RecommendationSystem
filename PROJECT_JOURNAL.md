@@ -47,3 +47,19 @@ modeling and evaluation decisions.
 ### Status
 
 Sprint 01 completed.
+
+---
+
+## Sprint 02 — Exploratory Analysis & Recommendation Insights
+
+Sprint 02 focused on understanding the behavioral structure of the recommendation dataset.
+
+The analysis moved beyond basic dataset exploration and focused on the relationships between users, movies, and interactions. User activity, movie popularity, rating behavior, genre preferences, and interaction sparsity were examined.
+
+One of the most important findings was the highly skewed interaction distribution. A relatively small number of users and movies account for a large proportion of interactions. The calculated interaction density was approximately 4.47%, highlighting the sparsity of the user–movie interaction space.
+
+Genre-level analysis also showed that movie genres have different interaction volumes and rating patterns. This suggests that genre information may provide useful signals for future recommendation strategies.
+
+The sprint also highlighted several engineering challenges, including popularity bias, rating bias, sparse interactions, and cold-start scenarios.
+
+The main outcome of Sprint 02 was a clearer understanding of the data limitations and the signals that can potentially be used when designing the first recommendation approach in Sprint 03.

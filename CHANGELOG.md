@@ -24,3 +24,31 @@
 -   Monthly aggregation was selected for temporal analysis.
 -   UserID and MovieID were treated as identifiers rather than
     meaningful numerical features.
+
+---
+
+## [Sprint 02] — Exploratory Analysis & Recommendation Insights
+
+### Added
+- User activity analysis
+- User rating statistics and rating consistency analysis
+- Movie popularity and average rating analysis
+- Movie release year extraction
+- Genre-level interaction analysis
+- User–movie–genre interaction analysis
+- Interaction density and sparsity analysis
+- Visualization of user activity and movie popularity distributions
+- Genre interaction and average rating visualizations
+- Rating distribution by genre visualization
+- Bias and data quality analysis
+- Engineering analysis of popularity bias, rating bias, sparsity, and cold-start
+
+### Key Findings
+- User and movie activity distributions are highly skewed.
+- The dataset contains significant popularity bias.
+- Interaction density is approximately 4.47%, with approximately 95.53% sparsity.
+- Genre-level rating behavior varies across genres.
+- Genre, user activity, movie statistics, and selected temporal features may be useful for recommendation.
+
+### Next
+- Begin recommendation logic and candidate recommendation strategies in Sprint 03.

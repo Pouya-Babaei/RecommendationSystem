@@ -144,3 +144,29 @@ joining the datasets.
 **Alternative:**\
 Use the IDs only as keys for data integration while excluding them from
 numerical feature representations used for similarity or prediction.
+
+---
+
+## Sprint 02 Decisions
+
+### Interaction Sparsity
+
+The user–movie interaction matrix is highly sparse, with approximately 4.47% density and 95.53% sparsity.
+
+This will be considered when selecting and designing recommendation methods.
+
+### Movie Rating Evaluation
+
+Average movie rating should not be interpreted independently from rating count because movies with very few ratings can produce unstable averages.
+
+### Genre Representation
+
+Because movies can belong to multiple genres, genre information will be represented as multi-label data rather than assigning a single genre to each movie.
+
+### User Activity
+
+User activity level will be considered when interpreting observed preferences, since users with substantially different numbers of ratings provide different amounts of behavioral evidence.
+
+### Identifiers
+
+UserID and MovieID will primarily be treated as identifiers rather than descriptive numerical features.
