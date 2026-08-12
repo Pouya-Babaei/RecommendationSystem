@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.*
+
+# Logs
+*.log
+
+# Python packaging
+*.egg-info/
+dist/
+build/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local temporary files
+tmp/
+temp/
+
+# Model artifacts
+*.pkl
+*.joblib
+*.pickle
+
+# Notebook-generated large outputs
+# Uncomment only if notebook outputs become too large:
+# *.html
+
+# Dataset
+data/raw/
+data/processed/
