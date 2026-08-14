@@ -30,6 +30,75 @@ relevant movie recommendations from user-item interaction data.
 The dataset contains user information, movie metadata, and user-movie
 rating interactions.
 
+---
+
+## Dataset Setup
+
+This project uses the **MovieLens 1M** dataset for building and evaluating the recommendation system.
+
+### 1. Download the Dataset
+
+Download the MovieLens 1M dataset from Kaggle website:
+
+https://www.kaggle.com/datasets/odedgolden/movielens-1m-dataset/data
+
+The dataset is provided as a ZIP archive.
+
+### 2. Extract the Dataset
+
+After downloading the archive, extract its contents.
+
+The extracted directory should contain the following files:
+
+```text
+movies.dat
+ratings.dat
+users.dat
+```
+
+### 3. Place the Dataset in the Project
+
+Place the extracted dataset directory inside the project's data directory.
+
+The expected structure is:
+
+```text
+project-root/
+├── data/
+│   └── ml-1m/
+│       ├── movies.dat
+│       ├── ratings.dat
+│       └── users.dat
+├── notebooks/
+├── reports/
+└── README.md
+```
+
+> **Note:** The dataset itself is not included in this repository. You must download it separately before running the notebooks.
+
+### 4. Dataset Format
+
+The MovieLens 1M dataset contains:
+
+* **Users:** user demographic information
+* **Movies:** movie titles and genres
+* **Ratings:** user ratings for movies
+
+The rating data contains user–movie interactions with ratings on a **1–5 scale** and timestamps.
+
+### 5. Verify the Setup
+
+Before running the notebooks, make sure the three `.dat` files are available under:
+
+```text
+data/ml-1m/
+```
+
+The notebooks can then be executed according to the project workflow described below.
+
+
+---
+
 ## Sprint 01 Findings
 
 -   The dataset contains 6,040 users, 3,883 movies, and 1,000,209 rating
@@ -46,6 +115,35 @@ rating interactions.
     peak around late 2000 followed by a considerable decline.
 -   UserID and MovieID are treated primarily as identifiers rather than
     meaningful numerical features.
+
+---
+
+### Sprint 03 — Recommendation Logic & Evaluation
+
+**Status:** Completed
+
+Sprint 03 established the first end-to-end personalized recommendation pipeline.
+
+The pipeline now includes:
+
+* User genre preference modeling
+* Movie quality estimation
+* Candidate generation
+* Personalized Top-10 recommendation scoring
+* Temporal train/test evaluation
+* Precision@10, Recall@10, and F1@10
+
+The system was evaluated across 5,956 users. The mean evaluation results were:
+
+| Metric       |     Mean |
+| ------------ | -------: |
+| Precision@10 | 0.045064 |
+| Recall@10    | 0.028039 |
+| F1@10        | 0.028109 |
+
+The results indicate that the initial recommendation approach is functional but has limited overall retrieval performance. Sprint 03 therefore provides a baseline for future improvements using stronger recommendation and collaborative filtering methods.
+
+---
 
 ## Repository Structure
 

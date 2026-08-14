@@ -170,3 +170,62 @@ User activity level will be considered when interpreting observed preferences, s
 ### Identifiers
 
 UserID and MovieID will primarily be treated as identifiers rather than descriptive numerical features.
+
+---
+
+## Sprint 03 — Recommendation System Decisions
+
+### ED-03-01 — Temporal Train/Test Split
+
+**Decision:** Use a chronological 80/20 split for each user's rating history.
+
+**Rationale:** Recommendation systems should be evaluated by predicting future interactions from past interactions. A temporal split better represents this scenario than a random split.
+
+---
+
+### ED-03-02 — Relevance Threshold
+
+**Decision:** Define a test rating of 4 or higher as relevant.
+
+**Rationale:** The evaluation requires a binary distinction between relevant and non-relevant future interactions.
+
+---
+
+### ED-03-03 — Confidence-Weighted Genre Preference
+
+**Decision:** Shrink user-genre mean ratings toward the global training mean using the number of observations.
+
+**Rationale:** Genre preferences based on very few ratings are less reliable than preferences supported by many observations.
+
+---
+
+### ED-03-04 — Confidence-Weighted Movie Quality
+
+**Decision:** Combine movie average rating with rating count when estimating movie quality.
+
+**Rationale:** A high average rating supported by very few ratings should not automatically dominate a score supported by substantially more evidence.
+
+---
+
+### ED-03-05 — Candidate Filtering
+
+**Decision:** Exclude movies already rated by the user in the training data.
+
+**Rationale:** Previously rated movies should not appear as new recommendations.
+
+---
+
+### ED-03-06 — Combining Personalization and Quality
+
+**Decision:** Combine scaled user preference and scaled movie quality using a harmonic-mean-based final score.
+
+**Rationale:** The recommendation should perform well on both personalization and overall movie quality rather than relying entirely on either signal.
+
+---
+
+### ED-03-07 — Manual Evaluation Metrics
+
+**Decision:** Implement Precision@10, Recall@10, and F1@10 manually.
+
+**Rationale:** Manual implementation provides direct visibility into the definitions and calculations of the evaluation metrics and avoids treating the metrics as black-box library functions.
+
