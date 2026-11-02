@@ -139,7 +139,10 @@ Where:
 
 This prevents movies with very small rating counts from receiving an excessively strong quality score based on limited evidence.
 
-Candidate movies were restricted using a minimum rating-count threshold.
+Candidate movies were restricted using a minimum rating-count threshold
+calculated exclusively from the training dataset.
+
+For the current temporal split, the resulting threshold was 92 ratings.
 
 ---
 
@@ -163,6 +166,10 @@ user_candidates_df = candidate_movies_df[
 This ensures that the recommendation list contains movies that the system could actually recommend to the user.
 
 Movies with multiple genres were then exploded into genre-level rows so that the user's genre preferences could be matched to each movie.
+The candidate pool was constructed from movies with training interactions and filtered using the training-based minimum rating-count
+threshold.
+
+The filtered candidate pool was preserved throughout the recommendation pipeline to ensure that the candidate generation constraints were consistently applied during evaluation.
 
 ---
 
@@ -260,7 +267,7 @@ Rating >= 4
 3. Recommended movies were compared with the user's relevant test movies.
 4. Precision@10, Recall@10, and F1@10 were calculated manually.
 
-The evaluation was performed across **5,956 users**.
+The evaluation was performed across 5,956 users with at least one relevant test interaction.
 
 ---
 
@@ -277,8 +284,8 @@ Relevant Recommended Movies
 
 The mean Precision@10 was:
 
-```text
-0.045064
+```
+0.045181
 ```
 
 This means that approximately 4.5% of the Top-10 recommendations were relevant on average under the defined evaluation setup.
@@ -298,8 +305,8 @@ All Relevant Test Movies
 
 The mean Recall@10 was:
 
-```text
-0.028039
+```
+0.028092
 ```
 
 This indicates that the system retrieved approximately 2.8% of the relevant future test items on average.
@@ -320,7 +327,7 @@ F1 =
 The mean F1@10 was:
 
 ```text
-0.028109
+0.028164
 ```
 
 The harmonic mean was used because a useful recommendation system should ideally balance both precision and recall rather than optimizing only one of them.
@@ -331,15 +338,43 @@ The harmonic mean was used because a useful recommendation system should ideally
 
 | Metric       |     Mean |      Std |   Median |      Min |      Max |
 | ------------ | -------: | -------: | -------: | -------: | -------: |
-| Precision@10 | 0.045064 | 0.095230 | 0.000000 | 0.000000 | 0.900000 |
-| Recall@10    | 0.028039 | 0.073229 | 0.000000 | 0.000000 | 1.000000 |
-| F1@10        | 0.028109 | 0.058474 | 0.000000 | 0.000000 | 0.461538 |
+| Precision@10 | 0.045181 | 0.095307 | 0.000000 | 0.000000 | 0.900000 |
+| Recall@10    | 0.028092 | 0.073260 | 0.000000 | 0.000000 | 1.000000 |
+| F1@10        | 0.028164 | 0.058495 | 0.000000 | 0.000000 | 0.461538 |
 
 The distribution of results shows substantial variation between users.
 
 More than half of the evaluated users had zero Precision@10, Recall@10, and F1@10, while some users achieved considerably higher scores.
 
 ---
+
+# Candidate Pool Diagnostics
+
+The candidate generation process was reviewed to verify that the
+minimum rating-count threshold was derived exclusively from training
+data.
+
+The resulting candidate pool contains:
+
+- Candidate threshold: 92 training ratings
+- Candidate movies: 1,839
+- Unique relevant test movies: 3,294
+- Relevant test movies available in the candidate pool: 1,836
+
+The unique relevant movie candidate coverage was calculated as:
+
+```
+Candidate Coverage =
+    Relevant Test Movies in Candidate Pool
+    /
+    Unique Relevant Test Movies
+
+Candidate Coverage = 1,836 / 3,294 = 0.557377
+
+Candidate Coverage = 55.74%
+
+---
+```
 
 # Key Findings
 
@@ -406,6 +441,17 @@ Therefore, the low scores should be interpreted in the context of the evaluation
 The evaluation was therefore performed across thousands of users rather than relying only on User 1.
 
 This provides a substantially stronger basis for judging the overall behavior of the recommendation pipeline.
+
+### 7. Candidate Generation Limits Retrieval Coverage
+
+The global candidate pool contains 1,836 of the 3,294 unique relevant
+test movies, resulting in a candidate coverage of 55.74%.
+
+This indicates that a substantial portion of unique relevant test
+movies is unavailable to the ranking stage.
+
+Candidate generation therefore represents an important area for
+further investigation in subsequent experiments.
 
 ---
 
@@ -489,14 +535,14 @@ This provided a direct understanding of how each evaluation metric was calculate
 
 ## Next Sprint
 
-The next stage should focus on establishing stronger baselines and exploring more advanced recommendation signals.
+Sprint 04 will focus on diagnosing the corrected recommendation
+baseline and systematically evaluating potential improvements.
 
-Potential directions include:
+Planned investigations include:
 
-* Popularity-based recommendation baseline.
-* Rating-based baseline.
-* User-user similarity.
-* Item-item similarity.
-* Collaborative filtering.
-* More systematic comparison of recommendation strategies.
-* Evaluation across multiple Top-K values.
+* Candidate threshold sensitivity analysis.
+* Candidate coverage and candidate pool size analysis.
+* Comparison of preference-only, quality-only, and hybrid ranking.
+* Evaluation of alternative ranking strategies.
+* Recommendation diversity and catalog coverage analysis.
+* Final baseline comparison and evaluation.

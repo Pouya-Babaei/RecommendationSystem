@@ -83,21 +83,40 @@ Sprint 03 moved the project from exploratory analysis toward an initial end-to-e
 
 ### Evaluation
 
-The recommendation pipeline was evaluated across 5,956 users.
+The corrected recommendation pipeline was evaluated across 5,956 users
+with at least one relevant test interaction.
 
 Mean results:
 
-* Precision@10: 0.045064
-* Recall@10: 0.028039
-* F1@10: 0.028109
+- Precision@10: 0.045181
+- Recall@10: 0.028092
+- F1@10: 0.028164
 
-The evaluation showed substantial variation between users. While some users achieved strong individual results, the overall mean performance remained low.
+### Candidate Pool Diagnostics
+
+The candidate generation process was corrected to ensure that the
+minimum rating-count threshold is calculated exclusively from training
+data.
+
+The resulting candidate pool contains 1,839 movies, using a minimum
+training rating count threshold of 92.
+
+Among 3,294 unique relevant test movies, 1,836 were present in the
+global candidate pool, resulting in a unique relevant movie candidate
+coverage of 55.74%.
+
+This coverage value is calculated before user-specific exclusion of
+movies rated in the training set.
 
 ### Main Learning
 
 The sprint demonstrated that genre preference alone was insufficient for producing differentiated recommendations. Incorporating movie-level quality created more varied rankings and provided a second signal alongside personalization.
 
 The evaluation also highlighted the difficulty of retrieving future relevant items from sparse user-item interactions using a relatively simple recommendation model.
+
+The sprint review highlighted the importance of maintaining a strict separation between training and test information during candidate
+generation. It also demonstrated that preserving the filtered candidate pool throughout the recommendation pipeline is essential for ensuring
+that the implemented evaluation setup matches the intended design.
 
 ### Reflection
 

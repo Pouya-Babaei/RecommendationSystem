@@ -229,3 +229,46 @@ UserID and MovieID will primarily be treated as identifiers rather than descript
 
 **Rationale:** Manual implementation provides direct visibility into the definitions and calculations of the evaluation metrics and avoids treating the metrics as black-box library functions.
 
+---
+
+### ED-03-08 — Training-Based Candidate Threshold
+
+**Decision:** Calculate the minimum movie rating-count threshold
+exclusively from the training dataset.
+
+**Rationale:**
+
+Using the full dataset to calculate the candidate threshold would
+allow information from future test interactions to influence candidate
+generation.
+
+Calculating the threshold from training data preserves the temporal
+separation between training and evaluation data.
+
+**Implementation:**
+
+The threshold is calculated using the median of movie rating counts
+derived from the training dataset.
+
+The resulting threshold for the current evaluation split is 92 ratings.
+
+**Alternative:**
+
+Use a predefined fixed threshold selected independently of the test
+dataset.
+
+---
+
+### ED-03-09 — Preserve the Filtered Candidate Pool
+
+**Decision:** Maintain the filtered candidate pool as the canonical
+candidate dataset throughout the recommendation pipeline.
+
+**Rationale:**
+
+Reassigning the candidate pool without reapplying the minimum
+rating-count filter can unintentionally bypass candidate generation
+constraints.
+
+Preserving the filtered dataset ensures consistency between the
+candidate generation design and the recommendation evaluation process.

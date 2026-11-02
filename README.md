@@ -15,9 +15,10 @@ relevant movie recommendations from user-item interaction data.
 
 ## Current Status
 
--   Sprint 01 --- Dataset Understanding & Initial Data Profiling:
-    **Completed**
--   Current phase: Dataset analysis and preparation
+- Sprint 01 — Dataset Understanding & Initial Data Profiling: **Completed**
+- Sprint 02 — Exploratory Analysis & Recommendation Insights: **Completed**
+- Sprint 03 — Initial Recommendation Logic & Evaluation: **Completed**
+- Current Phase: Recommendation Baseline Diagnosis & Experimentation (Sprint 04)
 
 ## Dataset Overview
 
@@ -133,15 +134,31 @@ The pipeline now includes:
 * Temporal train/test evaluation
 * Precision@10, Recall@10, and F1@10
 
-The system was evaluated across 5,956 users. The mean evaluation results were:
+The recommendation pipeline was evaluated across 5,956 users with at least one relevant test interaction.
 
-| Metric       |     Mean |
-| ------------ | -------: |
-| Precision@10 | 0.045064 |
-| Recall@10    | 0.028039 |
-| F1@10        | 0.028109 |
+| Metric       | Mean     |
+| ------------ | --------:|
+| Precision@10 | 0.045181 |
+| Recall@10    | 0.028092 |
+| F1@10        | 0.028164 |
 
-The results indicate that the initial recommendation approach is functional but has limited overall retrieval performance. Sprint 03 therefore provides a baseline for future improvements using stronger recommendation and collaborative filtering methods.
+The evaluation results indicate that the initial hybrid recommendation
+approach is functional but has limited retrieval performance.
+
+These results establish the corrected baseline for subsequent
+experimentation and model improvement in Sprint 04.
+
+### Candidate Pool Diagnostics
+
+- Minimum training rating count threshold: 92
+- Candidate movies: 1,839
+- Unique relevant test movies: 3,294
+- Relevant test movies present in the candidate pool: 1,836
+- Unique relevant movie candidate coverage: 55.74%
+
+Candidate coverage measures the proportion of unique relevant test
+movies available in the global candidate pool before user-specific
+training-history filtering.
 
 ---
 

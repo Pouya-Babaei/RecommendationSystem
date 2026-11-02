@@ -66,19 +66,34 @@
 * Personalized movie scoring combining genre preference and movie quality.
 * Top-10 recommendation generation.
 * Manual Precision@10, Recall@10, and F1@10 evaluation.
+* Training-only candidate threshold calculation to prevent test-data leakage.
+* Candidate pool filtering based on minimum training rating counts.
+* Corrected candidate pool assignment to preserve the filtered candidate set.
+* Candidate pool coverage analysis.
+* Updated recommendation evaluation after candidate generation corrections.
 
 ### Evaluation
 
 * Evaluated recommendations across 5,956 users.
-* Mean Precision@10: 0.045064
-* Mean Recall@10: 0.028039
-* Mean F1@10: 0.028109
+* Mean Precision@10: 0.045181
+* Mean Recall@10: 0.028092
+* Mean F1@10: 0.028164
+
+### Candidate Pool Diagnostics
+
+* Candidate threshold: 92 training ratings
+* Candidate pool size: 1,839 movies
+* Unique relevant test movies: 3,294
+* Relevant test movies in candidate pool: 1,836
+* Unique relevant movie candidate coverage: 55.74%
 
 ### Findings
 
-* Genre preference alone produced less differentiated rankings.
-* Adding movie-level quality produced more diverse Top-10 recommendations.
-* Overall recommendation performance remained low, with substantial variation across users.
+* The initial hybrid recommendation pipeline successfully generates personalized Top-10 recommendations.
+* Combining genre preference and movie quality produces more differentiated rankings than genre preference alone.
+* Overall recommendation performance remains limited, with substantial variation across users.
+* Candidate pool diagnostics show that 55.74% of unique relevant test movies are available before user-specific filtering.
+* Candidate generation and ranking quality remain important areas for further investigation.
 
 ### Next
 
